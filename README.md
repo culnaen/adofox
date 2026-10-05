@@ -9,4 +9,6 @@ docker build -t adofox .
 ./adofox
 ```
 
+The launcher mounts the host directory `~/.adofox` at `/home/ffuser` in the container. Firefox saves its profile there.
+
 Use this browser only for trusted legacy sites. Firefox and Flash no longer receive security updates.
