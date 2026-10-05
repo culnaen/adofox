@@ -17,7 +17,8 @@ for tool in docker xauth; do
 done
 
 base="${HOME}/.adofox"
-mkdir -p "$base"
+share="${HOME}/adofox-share"
+mkdir -p "$base" "$share"
 auth_dir=$(mktemp -d)
 trap 'rm -rf -- "$auth_dir"' EXIT
 chmod 700 "$auth_dir"
@@ -39,6 +40,7 @@ args=(--rm --init
     -e XAUTHORITY=/tmp/adofox-xauth/xauth
     -v /tmp/.X11-unix:/tmp/.X11-unix:ro
     -v "$auth_dir:/tmp/adofox-xauth:ro"
+    -v "$share:/home/adofox:ro"
     -v "$base:/home/ffuser")
 if [[ -t 0 && -t 1 ]]; then
     args+=(-it)
