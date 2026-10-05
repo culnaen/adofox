@@ -33,7 +33,7 @@ if [[ ! -r $host_auth ]] || ! xauth -f "$host_auth" nlist "$DISPLAY" | sed 's/^.
     exit 1
 fi
 
-args=(--rm --init
+args=(--rm --init --shm-size=1g
     --user "$(id -u):$(id -g)"
     -e HOME=/home/ffuser
     -e "DISPLAY=$DISPLAY"
