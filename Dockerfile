@@ -6,10 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
     MOZ_PLUGIN_PATH=/usr/lib/mozilla/plugins
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ca-certificates curl bzip2 locales \
+        ca-certificates curl bzip2 locales dbus-x11 \
         libgtk-3-0 libgtk2.0-0 libgl1-mesa-glx libdbus-glib-1-2 libasound2 libxt6 libnss3 \
         libx11-xcb1 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 \
-        libfontconfig1 fonts-dejavu-core && \
+        libfontconfig1 fonts-dejavu-core breeze-icon-theme && \
     locale-gen en_US.UTF-8 ru_RU.UTF-8 && \
     rm -rf /var/lib/apt/lists/*
 

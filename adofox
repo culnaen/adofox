@@ -25,6 +25,8 @@ chmod 700 "$auth_dir"
 auth_file="$auth_dir/xauth"
 touch "$auth_file"
 chmod 600 "$auth_file"
+machine_id=$(</proc/sys/kernel/random/uuid)
+printf '%s\n' "${machine_id//-/}" > "$auth_dir/machine-id"
 
 # Wildcard the Xauthority family: the hostname changes inside the container.
 host_auth="${XAUTHORITY:-${HOME}/.Xauthority}"
@@ -40,6 +42,7 @@ args=(--rm --init --shm-size=1g
     -e XAUTHORITY=/tmp/adofox-xauth/xauth
     -v /tmp/.X11-unix:/tmp/.X11-unix:ro
     -v "$auth_dir:/tmp/adofox-xauth:ro"
+    -v "$auth_dir/machine-id:/etc/machine-id:ro"
     -v "$share:/home/adofox:ro"
     -v "$base:/home/ffuser")
 if [[ -t 0 && -t 1 ]]; then
